@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferencias Económicas en el SEN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        select {
+            padding: 10px;
+            margin: 10px 0;
+        }
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Transferencias Económicas en el SEN</h1>
+
+<!-- Primer selector -->
+<label for="selectorPrincipal">Mercados:</label>
+<select id="selectorPrincipal" onchange="actualizarOpciones()">
+    <option value="">Selecciona...</option>
+    <option value="SEN">SEN</option>
+    <option value="Energía">Energía</option>
+    <option value="Potencia">Potencia</option>
+    <option value="SSCC">SSCC</option>
+</select>
+
+<!-- Segundo selector -->
+<label for="selectorSecundario">Tipo de gráfico:</label>
+<select id="selectorSecundario" onchange="cargarGrafico()">
+    <option value="">Selecciona un gráfico:</option>
+</select>
+
+<!-- Iframe para mostrar el gráfico -->
+<iframe id="graficoIframe" src=""></iframe>
+
+<script>
+    function actualizarOpciones() {
+        var selectorPrincipal = document.getElementById("selectorPrincipal").value;
+        var selectorSecundario = document.getElementById("selectorSecundario");
+        
+        // Limpiar opciones del segundo selector
+        selectorSecundario.innerHTML = '<option value="">Selecciona un gráfico</option>';
+        
+        // Actualizar opciones según la selección del primer selector
+        if (selectorPrincipal === "SEN") {
+            selectorSecundario.innerHTML += '<option value="sunburst remuneraciones.html">Sunburst</option>';
+            cargarGrafico(); // Cargar el gráfico directamente
+        } else if (selectorPrincipal === "Energía") {
+            selectorSecundario.innerHTML += '<option value="Sankey energia.html">Sankey Anual</option>';
+            selectorSecundario.innerHTML += '<option value="Sankey energia mensual.html">Sankey Mensual</option>';
+            selectorSecundario.innerHTML += '<option value="Barras_energia.html">Barras</option>';
+            selectorSecundario.innerHTML += '<option value="Barras energia mensual.html">Barras Mensual</option>'; // Añadido
+            selectorSecundario.innerHTML += '<option value="Cascada energia.html">Cascada</option>';
+        } else if (selectorPrincipal === "Potencia") {
+            selectorSecundario.innerHTML += '<option value="Sankey potencia de suficiencia.html">Sankey Anual</option>';
+            selectorSecundario.innerHTML += '<option value="Barras potencia.html">Barras Anual</option>';
+                    } else if (selectorPrincipal === "SSCC") {
+            selectorSecundario.innerHTML += '<option value="Sankey SSCC.html">Sankey Anual</option>';
+            selectorSecundario.innerHTML += '<option value="sankey sscc mensual.html">Sankey Mensual</option>';
+            selectorSecundario.innerHTML += '<option value="Barras sscc.html">Barras Anual</option>';
+            selectorSecundario.innerHTML += '<option value="Barras sscc mensual.html">Barras Mensual</option>';
+        }
+    }
+
+    function cargarGrafico() {
+        var selectorSecundario = document.getElementById("selectorSecundario").value;
+        var iframe = document.getElementById("graficoIframe");
+
+        if (selectorSecundario) {
+            iframe.src = selectorSecundario; // Actualiza el iframe con el gráfico seleccionado
+        } else {
+            iframe.src = ""; // Limpia el iframe si no hay selección
+        }
+    }
+</script>
+
+</body>
+</html>

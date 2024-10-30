@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama Sankey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #selector {
+            margin-bottom: 50px;
+        }
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transferencias económicas en el SEN</h1>
+    
+    <div id="selector">
+        <button onclick="cargarHTML('Sankey energia.html')">Mercado de Energía</button>
+        <button onclick="cargarHTML('Sankey potencia de suficiencia.html')">Mercado de Potencia</button>
+        <button onclick="cargarHTML('Sankey SSCC.html')">Mercado de SSCC</button>
+        <button onclick="cargarHTML('Sankey remuneracion generadores.html')">Remuneración generadores</button>
+    </div>
+
+    <iframe id="visor" src="archivo1.html"></iframe>
+
+    <script>
+        function cargarHTML(archivo) {
+            document.getElementById('visor').src = archivo;
+        }
+    </script>
+</body>
+</html>

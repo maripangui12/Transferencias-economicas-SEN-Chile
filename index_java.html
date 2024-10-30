@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferencias Económicas en el SEN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        select {
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .grafico {
+            width: 100%;
+            height: 800px;
+            display: none; /* Oculto por defecto */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Transferencias Económicas en el SEN</h1>
+
+<!-- Primer selector -->
+<label for="selectorPrincipal">Mercados:</label>
+<select id="selectorPrincipal" onchange="actualizarOpciones()">
+    <option value="">Selecciona...</option>
+    <option value="SEN">SEN</option>
+    <option value="Energía">Energía</option>
+    <option value="Potencia">Potencia</option>
+    <option value="SSCC">SSCC</option>
+</select>
+
+<!-- Segundo selector -->
+<label for="selectorSecundario">Tipo de gráfico:</label>
+<select id="selectorSecundario" onchange="cargarGrafico()">
+    <option value="">Selecciona un gráfico:</option>
+</select>
+
+<!-- Contenedores para gráficos embebidos -->
+<div id="sunburst" class="grafico">
+    <!-- Pega aquí el contenido de sunburst_remuneraciones.html -->
+</div>
+<div id="sankey_energia" class="grafico">
+    <!-- Pega aquí el contenido de Sankey_energia.html -->
+</div>
+<div id="sankey_energia_mensual" class="grafico">
+    <!-- Pega aquí el contenido de Sankey_energia_mensual.html -->
+</div>
+<div id="barras_energia" class="grafico">
+    <!-- Pega aquí el contenido de Barras_energia.html -->
+</div>
+<div id="barras_energia_mensual" class="grafico">
+    <!-- Pega aquí el contenido de Barras_energia_mensual.html -->
+</div>
+<div id="cascada_energia" class="grafico">
+    <!-- Pega aquí el contenido de Cascada_energia.html -->
+</div>
+<div id="sankey_potencia" class="grafico">
+    <!-- Pega aquí el contenido de Sankey_potencia_de_suficiencia.html -->
+</div>
+<div id="barras_potencia" class="grafico">
+    <!-- Pega aquí el contenido de Barras_potencia.html -->
+</div>
+<div id="sankey_sscc" class="grafico">
+    <!-- Pega aquí el contenido de Sankey_SSCC.html -->
+</div>
+<div id="sankey_sscc_mensual" class="grafico">
+    <!-- Pega aquí el contenido de Sankey_sscc_mensual.html -->
+</div>
+<div id="barras_sscc" class="grafico">
+    <!-- Pega aquí el contenido de Barras_sscc.html -->
+</div>
+<div id="barras_sscc_mensual" class="grafico">
+    <!-- Pega aquí el contenido de Barras_sscc_mensual.html -->
+</div>
+
+<script>
+    function actualizarOpciones() {
+        var selectorPrincipal = document.getElementById("selectorPrincipal").value;
+        var selectorSecundario = document.getElementById("selectorSecundario");
+        
+        // Limpiar opciones del segundo selector
+        selectorSecundario.innerHTML = '<option value="">Selecciona un gráfico</option>';
+        
+        // Actualizar opciones según la selección del primer selector
+        if (selectorPrincipal === "SEN") {
+            selectorSecundario.innerHTML += '<option value="sunburst">Sunburst</option>';
+            cargarGrafico();
+        } else if (selectorPrincipal === "Energía") {
+            selectorSecundario.innerHTML += '<option value="sankey_energia">Sankey Anual</option>';
+            selectorSecundario.innerHTML += '<option value="sankey_energia_mensual">Sankey Mensual</option>';
+            selectorSecundario.innerHTML += '<option value="barras_energia">Barras</option>';
+            selectorSecundario.innerHTML += '<option value="barras_energia_mensual">Barras Mensual</option>';
+            selectorSecundario.innerHTML += '<option value="cascada_energia">Cascada</option>';
+        } else if (selectorPrincipal === "Potencia") {
+            selectorSecundario.innerHTML += '<option value="sankey_potencia">Sankey Anual</option>';
+            selectorSecundario.innerHTML += '<option value="barras_potencia">Barras Anual</option>';
+        } else if (selectorPrincipal === "SSCC") {
+            selectorSecundario.innerHTML += '<option value="sankey_sscc">Sankey Anual</option>';
+            selectorSecundario.innerHTML += '<option value="sankey_sscc_mensual">Sankey Mensual</option>';
+            selectorSecundario.innerHTML += '<option value="barras_sscc">Barras Anual</option>';
+            selectorSecundario.innerHTML += '<option value="barras_sscc_mensual">Barras Mensual</option>';
+        }
+    }
+
+    function cargarGrafico() {
+        // Oculta todos los gráficos
+        document.querySelectorAll('.grafico').forEach(div => div.style.display = 'none');
+
+        // Obtiene el valor seleccionado y muestra el gráfico correspondiente
+        var selectorSecundario = document.getElementById("selectorSecundario").value;
+        if (selectorSecundario) {
+            document.getElementById(selectorSecundario).style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
+

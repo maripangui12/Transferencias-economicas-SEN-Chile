@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #selector {
+            margin-bottom: 50px;
+        }
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Análisis histórico mercados SEN</h1>
+    
+    <div id="selector">
+        <button onclick="cargarHTML('barras energia.html')">Mercado de Energía</button>
+        <button onclick="cargarHTML('barras potencia.html')">Mercado de Potencia</button>
+        <button onclick="cargarHTML('barras sscc.html')">Mercado de SSCC</button>
+        <button onclick="cargarHTML('Sunburst remuneraciones.html')">Remuneración generadores</button>
+    </div>
+
+    <iframe id="visor" src="archivo1.html"></iframe>
+
+    <script>
+        function cargarHTML(archivo) {
+            document.getElementById('visor').src = archivo;
+        }
+    </script>
+</body>
+</html>
